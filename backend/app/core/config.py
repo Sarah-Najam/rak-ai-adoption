@@ -3,6 +3,7 @@
 from functools import lru_cache
 from typing import List
 
+from pydantic import field_validator
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
 
@@ -23,6 +24,24 @@ class Settings(BaseSettings):
     # Below this response rate a department's score is published but flagged.
     RELIABLE_RESPONSE_RATE: float = 60.0
     MINIMUM_RESPONSE_RATE: float = 40.0
+
+    @field_validator("CORS_ORIGINS", mode="before")
+    @classmethod
+    def parse_origins(cls, value: object) -> object:
+        """
+        Accept either a JSON array or a plain comma-separated list.
+
+        Hosting dashboards mangle quotes and brackets often enough that
+        insisting on strict JSON turns a one-line config into a deploy failure
+        with a stack trace that says nothing useful about the real cause.
+        """
+        if isinstance(value, str):
+            text = value.strip()
+            if not text:
+                return []
+            if not text.startswith("["):
+                return [part.strip().rstrip("/") for part in text.split(",") if part.strip()]
+        return value
 
     model_config = SettingsConfigDict(env_file=".env", case_sensitive=True)
 
