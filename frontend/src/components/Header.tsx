@@ -13,12 +13,10 @@ export const Header = ({ wave, source, onExport }: Props) => (
       <div className="lockup">
         <img className="logo-img" alt="RAK Properties" src={RAK_LOGO} />
         <div className="rule" />
-        <div className="ttl">
+       <div className="ttl">
           <span className="eyebrow">Learning &amp; Development</span>
           <h1>AI Adoption Index</h1>
-          <span className="eyebrow">Learning &amp; Development</span>
-<h1>AI Adoption Index</h1>
-<p className="ttl-sub">An HR Initiative to Drive AI Adoption Across RAKP</p>
+          <p className="ttl-sub">An HR Initiative to Drive AI Adoption Across RAKP</p>
         </div>
       </div>
 
