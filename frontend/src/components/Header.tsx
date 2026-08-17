@@ -16,6 +16,9 @@ export const Header = ({ wave, source, onExport }: Props) => (
         <div className="ttl">
           <span className="eyebrow">Learning &amp; Development</span>
           <h1>AI Adoption Index</h1>
+          <span className="eyebrow">Learning &amp; Development</span>
+<h1>AI Adoption Index</h1>
+<p className="ttl-sub">An HR Initiative to Drive AI Adoption Across RAKP</p>
         </div>
       </div>
 
