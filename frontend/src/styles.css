@@ -300,3 +300,25 @@
     *{transition:none!important;animation:none!important}
     section{opacity:1;transform:none}
   }
+/* ---------- explanatory tooltips ---------- */
+.info-dot{
+    display:inline-grid;place-items:center;width:15px;height:15px;margin-left:5px;
+    border:1px solid rgba(165,200,210,.45);border-radius:50%;
+    background:rgba(165,200,210,.10);color:var(--sky);
+    font-size:9.5px;font-style:italic;font-weight:600;line-height:1;
+    letter-spacing:0;text-transform:none;
+    cursor:help;padding:0;vertical-align:middle;transition:.16s;flex:none;
+  }
+  .info-dot:hover,.info-dot[aria-expanded="true"]{
+    border-color:var(--sky);background:var(--sky);color:var(--navy);
+  }
+  th{white-space:nowrap}
+  .info-bubble{
+    position:fixed;z-index:400;max-width:290px;
+    background:#0A2331;border:1px solid rgba(165,200,210,.3);
+    border-radius:10px;padding:12px 14px;
+    font-size:11.5px;line-height:1.55;color:var(--txt-2);
+    box-shadow:0 24px 55px -18px #000;
+    text-transform:none;letter-spacing:0;font-weight:400;text-align:left;
+  }
+  .info-bubble b{color:var(--txt);font-weight:600}

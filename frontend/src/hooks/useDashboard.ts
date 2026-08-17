@@ -14,6 +14,7 @@
 import { useCallback, useEffect, useMemo, useState } from "react";
 
 import { loadDashboard } from "@/lib/api";
+import { clearPreferences, loadPreferences, savePreferences } from "@/lib/preferences";
 import type {
   DashboardData,
   Department,
@@ -84,6 +85,12 @@ export const useDashboard = () => {
   const [selected, setSelected] = useState<string | null>(null);
   const [compare, setCompare] = useState<string[]>([]);
 
+  // Published values from data.json or the API. Kept so "reset" means "go back
+  // to what was published", not "go back to the code's defaults".
+  const [published, setPublished] = useState<{ weights: Weights; targets: Targets } | null>(null);
+  const [dirty, setDirty] = useState(false);
+  const [savedAt, setSavedAt] = useState<string | null>(null);
+
   // ---- load ---------------------------------------------------------------
   useEffect(() => {
     let cancelled = false;
@@ -91,8 +98,14 @@ export const useDashboard = () => {
       .then((payload) => {
         if (cancelled) return;
         setData(payload);
-        setWeights(payload.weights);
-        setTargets(payload.targets);
+        setPublished({ weights: payload.weights, targets: payload.targets });
+
+        // Anything saved in this browser wins over the published defaults, so a
+        // target someone set yesterday is still there today.
+        const saved = loadPreferences();
+        setWeights(saved?.weights ?? payload.weights);
+        setTargets(saved?.targets ?? payload.targets);
+        setSavedAt(saved?.savedAt ?? null);
         // Open on the most recent wave, which is what leadership wants to see.
         setFilters((f) => ({ ...f, wave: Math.max(0, payload.waves.length - 1) }));
         setCompare(payload.departments.slice(0, 2).map((d) => d.id));
@@ -206,13 +219,44 @@ export const useDashboard = () => {
 
   const setWeight = useCallback((key: IndicatorKey, value: number) => {
     setWeights((w) => ({ ...w, [key]: value }));
+    setDirty(true);
   }, []);
 
-  const resetWeights = useCallback(() => setWeights(DEFAULT_WEIGHTS), []);
+  const resetWeights = useCallback(() => {
+    setWeights(published?.weights ?? DEFAULT_WEIGHTS);
+    setDirty(true);
+  }, [published]);
+
+  const updateTargets = useCallback((next: Targets) => {
+    setTargets(next);
+    setDirty(true);
+  }, []);
 
   const setDeptTarget = useCallback((id: string, value: number) => {
     setTargets((t) => ({ ...t, byDept: { ...t.byDept, [id]: value } }));
+    setDirty(true);
   }, []);
+
+  /** Keep the current weights and targets for next time, in this browser. */
+  const saveSettings = useCallback((): boolean => {
+    const ok = savePreferences(weights, targets);
+    if (ok) {
+      setDirty(false);
+      setSavedAt(new Date().toISOString());
+    }
+    return ok;
+  }, [weights, targets]);
+
+  /** Discard local changes and go back to the published values. */
+  const resetSettings = useCallback(() => {
+    clearPreferences();
+    if (published) {
+      setWeights(published.weights);
+      setTargets(published.targets);
+    }
+    setDirty(false);
+    setSavedAt(null);
+  }, [published]);
 
   const toggleCompare = useCallback((id: string) => {
     setCompare((current) => {
@@ -244,8 +288,12 @@ export const useDashboard = () => {
     setWeight,
     resetWeights,
     targets,
-    setTargets,
+    setTargets: updateTargets,
     setDeptTarget,
+    saveSettings,
+    resetSettings,
+    dirty,
+    savedAt,
     selected: selectedView,
     setSelected,
     compare,

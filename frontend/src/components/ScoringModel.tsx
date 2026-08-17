@@ -39,12 +39,7 @@ export const ScoringModel = ({ dash }: { dash: Dashboard }) => {
           Total weight {total}%
         </div>
 
-        {total !== 100 && (
-          <div className="warn">
-            Weights do not total 100. Scores are normalised automatically, so the model still
-            works. Round numbers are just easier to explain to leadership.
-          </div>
-        )}
+     
 
         <button className="btn" style={{ marginTop: 14 }} type="button" onClick={resetWeights}>
           Reset default weights

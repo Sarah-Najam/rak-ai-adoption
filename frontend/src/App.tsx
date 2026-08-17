@@ -4,6 +4,7 @@ import { ExecutiveSummary } from "@/components/ExecutiveSummary";
 import { FilterBar } from "@/components/FilterBar";
 import { Header } from "@/components/Header";
 import { MaturityPanel } from "@/components/MaturityPanel";
+import { SaveBar } from "@/components/SaveBar";
 import { ScoringModel } from "@/components/ScoringModel";
 import { TargetsPanel } from "@/components/TargetsPanel";
 import { TreemapGrid } from "@/components/TreemapGrid";
@@ -52,6 +53,7 @@ const App = () => {
           </div>
         )}
 
+        <SaveBar dash={dash} />
         <ExecutiveSummary dash={dash} />
         <TreemapGrid dash={dash} />
 
