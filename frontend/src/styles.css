@@ -54,7 +54,6 @@
   .lockup .rule{width:1px;height:44px;background:var(--edge-2)}
   .lockup .ttl .eyebrow{display:block;margin-bottom:2px}
   .lockup .ttl h1{font-size:19px;font-weight:600}
-  .lockup .ttl .ttl-sub{margin:3px 0 0;font-size:12px;color:var(--txt-3);font-weight:400}
   .stamp{text-align:right;line-height:1.4}
   .stamp .v{font-family:"Inter",Helvetica,Arial,sans-serif;font-size:12px;color:var(--txt)}
   .pulse{display:inline-block;width:6px;height:6px;border-radius:50%;background:var(--sage);margin-right:7px;
@@ -64,9 +63,16 @@
   .btn{background:var(--glass);border:1px solid var(--edge);color:var(--txt);padding:8px 14px;border-radius:var(--r);
     font-size:12.5px;transition:.2s;position:relative;overflow:hidden}
   .btn:hover{background:var(--glass-2);border-color:var(--edge-2);transform:translateY(-1px)}
-  .btn.solid{background:var(--terracotta);border-color:var(--terracotta);color:#fff}
-  .btn.solid:hover{filter:brightness(1.12)}
-
+.lockup .ttl .ttl-sub{
+  margin:3px 0 0;
+  font-size:12px;
+  font-weight:500;
+  background:linear-gradient(90deg, #AF5F46, #FFFFFF);
+  -webkit-background-clip:text;
+  background-clip:text;
+  -webkit-text-fill-color:transparent;
+}
+.btn.solid:hover{filter:brightness(1.12)}
   /* ---------------- filters ---------------- */
   .filters{position:sticky;top:0;z-index:50;background:rgba(5,28,44,.86);backdrop-filter:blur(14px);
     border-bottom:1px solid var(--edge)}
@@ -291,7 +297,6 @@
     .stamp .v,h1{color:#051C2C!important}
     .lockup .logo-img{filter:none}
     .eyebrow,.shead p,.hint,.ghint,.kcell .s{color:#5C6F7E!important}
-    .eyebrow,.shead p,.hint,.ghint,.kcell .s,.ttl-sub{color:#5C6F7E!important}
     .shead h2{color:#051C2C}
     #stage{height:420px}
     .hero{grid-template-columns:1fr 1fr}
