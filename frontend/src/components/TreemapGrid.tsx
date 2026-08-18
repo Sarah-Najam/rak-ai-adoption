@@ -62,8 +62,12 @@ const Tooltip = ({ state, wave }: { state: TooltipState | null; wave: string }) 
         <b>{view.previousRate === null ? "baseline" : `${signed(view.rate - view.previousRate)} pts`}</b>
       </div>
       <div className="tr"><span>Active users</span><b>{view.active} of {view.staff}</b></div>
-      <div className="tr"><span>AI-enabled solutions</span><b>{snapshot?.aiSolutions ?? 0}</b></div>
-      <div className="tr"><span>Of which, personal use</span><b>{snapshot?.aiSolutionsPersonal ?? 0}</b></div>      {snapshot && (
+      <div className="tf" style={{ marginTop: 4, marginBottom: -2 }}>AI Solutions Development</div>
+      <div className="tr"><span>AI agents built</span><b>{snapshot?.aiAgentsCount ?? 0}</b></div>
+      <div className="tr" style={{ paddingLeft: 14, opacity: 0.75 }}><span>of which, personal use</span><b>{snapshot?.aiAgentsPersonal ?? 0}</b></div>
+      <div className="tr"><span>Processes automated</span><b>{snapshot?.aiAutomationsCount ?? 0}</b></div>
+      <div className="tr" style={{ paddingLeft: 14, opacity: 0.75 }}><span>of which, personal use</span><b>{snapshot?.aiAutomationsPersonal ?? 0}</b></div>     
+      {snapshot && (
         <div className="tr">
           <span>Sessions / user / week</span>
           <b>{snapshot.sessions.toFixed(1)}</b>

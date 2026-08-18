@@ -1,6 +1,5 @@
 /** Everything known about one department, opened by clicking a tile. */
-import { useEffect } from "react";
-
+import { useEffect, Fragment } from "react";
 import type { Dashboard } from "@/hooks/useDashboard";
 import {
   INDICATOR_META, LEVELS, STATUS_CLASS, STATUS_LABEL,
@@ -73,10 +72,16 @@ export const DetailDrawer = ({ dash }: { dash: Dashboard }) => {
                   <div className="v">{snapshot.sessions.toFixed(1)} <small>sessions / user / week</small></div></div>
                 <div><div className="k">AI use cases</div>
                   <div className="v">{snapshot.cases} <small>documented</small></div></div>
-                <div><div className="k">AI-enabled solutions</div>
-                  <div className="v">{snapshot.aiSolutions} <small>agents + automations</small></div></div>
-                <div><div className="k">Personal use</div>
-                  <div className="v">{snapshot.aiSolutionsPersonal} <small>included in score</small></div></div>
+              </div>
+
+              <h4 style={{ fontSize: 11, letterSpacing: "0.16em", textTransform: "uppercase", color: "var(--sky)", margin: "18px 0 10px" }}>
+                AI Solutions Development
+              </h4>
+              <div className="kv">
+                <div><div className="k">AI agents built</div>
+                  <div className="v">{snapshot.aiAgentsCount} <small>{snapshot.aiAgentsPersonal} personal use</small></div></div>
+                <div><div className="k">Processes automated</div>
+                  <div className="v">{snapshot.aiAutomationsCount} <small>{snapshot.aiAutomationsPersonal} personal use</small></div></div>
               </div>
 
               <div className="blk">
@@ -84,12 +89,22 @@ export const DetailDrawer = ({ dash }: { dash: Dashboard }) => {
                 {(() => {
                   const adjusted = adjustedMetrics(snapshot.metrics, filters.level);
                   return INDICATOR_META.map((meta) => (
-                    <div className="bl" key={meta.key}>
-                      <span>{meta.label}</span>
-                      <span className="tr"><i style={{ width: `${clamp(adjusted[meta.key])}%` }} /></span>
-                      <span className="vv">{fmt0(adjusted[meta.key])}</span>
-                    </div>
-                  ));
+                        <Fragment key={meta.key}>
+                      {meta.key === "agent" && (
+                        <div style={{
+                          marginTop: 14, paddingTop: 12, borderTop: "1px solid var(--edge)",
+                          fontSize: 11, letterSpacing: "0.16em", textTransform: "uppercase",
+                          color: "var(--sky)", marginBottom: 6,
+                        }}>
+                          AI Solutions Development
+                        </div>
+                      )}
+                      <div className="bl">
+                        <span>{meta.label}</span>
+                        <span className="tr"><i style={{ width: `${clamp(adjusted[meta.key])}%` }} /></span>
+                        <span className="vv">{fmt0(adjusted[meta.key])}</span>
+                      </div>
+                    </Fragment>                  ));
                 })()}
                 <div className="hint">
                   Each indicator is scored 0 to 100, then combined using the weights in the

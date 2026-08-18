@@ -18,8 +18,10 @@ export interface WireDepartment {
   metrics?: Partial<Record<IndicatorKey, number>>;
   sessions?: number;
   cases?: number;
-  aiSolutions?: number;
-  aiSolutionsPersonal?: number;
+  aiAgentsCount?: number;
+  aiAgentsPersonal?: number;
+  aiAutomationsCount?: number;
+  aiAutomationsPersonal?: number;
   /** Pairs of tool name and the share of the department using it. */
   tools?: (string | number)[][];
   processes?: string[];
