@@ -1,21 +1,4 @@
-"""
-The AI Adoption Index scoring model.
 
-This module is deliberately pure: no database, no HTTP, no file reading. Every
-function takes plain data and returns plain data, which is what makes the model
-testable and what makes it possible to prove that Wave 1 and Wave 2 were scored
-identically.
-
-Two ideas underpin everything here.
-
-1. Each of the eight indicators is normalised to a 0-100 score, whatever its
-   natural unit. Sessions per week and percentage of staff trained are not
-   comparable until you put them on the same scale.
-
-2. The adoption rate is a weighted mean of those eight scores. The weights are
-   configuration, not code, so leadership can change what matters without a
-   developer being involved.
-"""
 
 from __future__ import annotations
 
@@ -29,7 +12,7 @@ from typing import Dict, Iterable, List, Optional, Sequence
 # ---------------------------------------------------------------------------
 
 class Indicator(str, Enum):
-    """The eight things measured. The string values are the API and DB keys."""
+    """The ten things measured. The string values are the API and DB keys."""
 
     ACTIVE_USERS = "users"
     USAGE_FREQUENCY = "freq"
@@ -39,6 +22,9 @@ class Indicator(str, Enum):
     WORKFLOW_COVERAGE = "cover"
     PROFICIENCY = "prof"
     SAFE_USE = "comp"
+    AGENT_CREATION = "agent"
+    PROCESS_AUTOMATION = "automate"
+    
 
 
 INDICATOR_LABELS: Dict[Indicator, str] = {
@@ -50,17 +36,21 @@ INDICATOR_LABELS: Dict[Indicator, str] = {
     Indicator.WORKFLOW_COVERAGE: "Eligible workflows covered",
     Indicator.PROFICIENCY: "Proficiency and readiness",
     Indicator.SAFE_USE: "Safe use of AI",
+    Indicator.AGENT_CREATION: "AI agents built",
+    Indicator.PROCESS_AUTOMATION: "Processes automated",
 }
 
 DEFAULT_WEIGHTS: Dict[str, float] = {
-    Indicator.ACTIVE_USERS: 20,
+    Indicator.ACTIVE_USERS: 16,
     Indicator.USAGE_FREQUENCY: 15,
     Indicator.TRAINING: 15,
     Indicator.WORKFLOW: 15,
-    Indicator.TASK_VOLUME: 10,
+    Indicator.TASK_VOLUME: 8,
     Indicator.WORKFLOW_COVERAGE: 10,
     Indicator.PROFICIENCY: 10,
     Indicator.SAFE_USE: 5,
+    Indicator.AGENT_CREATION: 3,
+    Indicator.PROCESS_AUTOMATION: 3,
 }
 
 # Targets that define a score of 100 for indicators measured in natural units.
@@ -166,7 +156,6 @@ def normalise_weights(weights: Dict[str, float]) -> Dict[str, float]:
 
 @dataclass
 class IndicatorScores:
-    """The eight normalised scores for one department in one survey wave."""
 
     users: float = 0.0
     freq: float = 0.0
@@ -176,6 +165,8 @@ class IndicatorScores:
     cover: float = 0.0
     prof: float = 0.0
     comp: float = 0.0
+    agent: float = 0.0
+    automate: float = 0.0
 
     def as_dict(self) -> Dict[str, float]:
         return {
@@ -187,6 +178,8 @@ class IndicatorScores:
             Indicator.WORKFLOW_COVERAGE: self.cover,
             Indicator.PROFICIENCY: self.prof,
             Indicator.SAFE_USE: self.comp,
+            Indicator.AGENT_CREATION: self.agent,
+            Indicator.PROCESS_AUTOMATION: self.automate,
         }
 
     @classmethod
@@ -241,6 +234,8 @@ class DepartmentResult:
     processes: List[str] = field(default_factory=list)
     gap: str = "Not recorded"
     opportunity: str = "Not recorded"
+    ai_solutions: int = 0
+    ai_solutions_personal: int = 0
 
     @property
     def response_rate(self) -> float:

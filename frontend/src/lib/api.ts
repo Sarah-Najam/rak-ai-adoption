@@ -40,6 +40,8 @@ const toWave = (d: WireDepartment): DepartmentWave => {
     metrics,
     sessions: d.sessions ?? 0,
     cases: d.cases ?? 0,
+    aiSolutions: d.aiSolutions ?? 0,
+    aiSolutionsPersonal: d.aiSolutionsPersonal ?? 0,
     // Tuples arrive from JSON as plain arrays, so narrow them here rather than
     // trusting the shape further up.
     tools: (d.tools ?? [])

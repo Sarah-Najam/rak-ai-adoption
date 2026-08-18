@@ -1,19 +1,4 @@
-"""
-Database schema.
 
-Two decisions shape everything here.
-
-First, raw survey responses are stored alongside the calculated scores. Scores
-are derived data: if a scoring rule is ever corrected, every wave can be
-re-scored from the original answers. Throwing away the raw responses would make
-the numbers permanently unauditable, and six months from now somebody will ask
-how a figure was produced.
-
-Second, headcount is stored per wave rather than once per department. People
-join and leave. A department that was 41 people in August and 46 in November
-must not have its August response rate recalculated against next year's
-headcount, or last year's conclusions quietly change.
-"""
 
 from __future__ import annotations
 
@@ -215,6 +200,11 @@ class DepartmentScore(Base, TimestampMixin):
     cover: Mapped[float] = mapped_column(Float, default=0)
     prof: Mapped[float] = mapped_column(Float, default=0)
     comp: Mapped[float] = mapped_column(Float, default=0)
+    agent: Mapped[float] = mapped_column(Float, default=0)
+    automate: Mapped[float] = mapped_column(Float, default=0)
+
+    ai_solutions: Mapped[int] = mapped_column(Integer, default=0)
+    ai_solutions_personal: Mapped[int] = mapped_column(Integer, default=0)
 
     respondents: Mapped[int] = mapped_column(Integer, default=0)
     active_users: Mapped[int] = mapped_column(Integer, default=0)

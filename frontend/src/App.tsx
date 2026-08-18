@@ -45,13 +45,7 @@ const App = () => {
       <FilterBar dash={dash} />
 
       <div className="wrap">
-        {/* Sample figures must never be mistaken for measured results. */}
-        {dash.source === "sample" && (
-          <div className="warn" style={{ marginTop: 14 }}>
-            Showing built-in sample figures. Connect the API or publish a data.json file to show
-            real survey results.
-          </div>
-        )}
+       
 
         <SaveBar dash={dash} />
         <ExecutiveSummary dash={dash} />

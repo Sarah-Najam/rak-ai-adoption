@@ -11,14 +11,16 @@ import type { WirePayload } from "./wire";
 
 export const SAMPLE_PAYLOAD: WirePayload = {
   "weights": {
-    "users": 20,
+    "users": 16,
     "freq": 15,
     "train": 15,
     "flow": 15,
-    "tasks": 10,
+    "tasks": 8,
     "cover": 10,
     "prof": 10,
-    "comp": 5
+    "comp": 5,
+    "agent": 3,
+    "automate": 3
   },
   "targets": {
     "org": 70,
@@ -28,10 +30,10 @@ export const SAMPLE_PAYLOAD: WirePayload = {
   },
   "waves": [
     {
-      "label": "Wave 1 · Aug 2026 (sample)",
+      "label": "Wave 1 \u00b7 Aug 2026 (sample)",
       "departments": [
         {
-          "name": "Information Technology",
+          "name": "IT",
           "function": "Technology",
           "staff": 24,
           "mix": {
@@ -42,16 +44,19 @@ export const SAMPLE_PAYLOAD: WirePayload = {
           },
           "metrics": {
             "users": 92,
-            "freq": 95,
-            "train": 98,
-            "flow": 90,
-            "tasks": 88,
-            "cover": 86,
-            "prof": 94,
-            "comp": 98
+            "freq": 89,
+            "train": 100,
+            "flow": 88,
+            "tasks": 86,
+            "cover": 82,
+            "prof": 90,
+            "comp": 100,
+            "agent": 32,
+            "automate": 39
           },
-          "sessions": 8.6,
-          "cases": 19,
+          "sessions": 9.2,
+          "cases": 18,
+          "aiSolutions": 9,
           "tools": [
             [
               "Claude (Enterprise)",
@@ -73,10 +78,60 @@ export const SAMPLE_PAYLOAD: WirePayload = {
             "Vendor documentation summarising"
           ],
           "gap": "Use is concentrated in the engineering team; night-shift service desk still works manually.",
-          "opportunity": "Publish the ticket-triage assistant as a shared service other departments can call."
+          "opportunity": "Publish the ticket-triage assistant as a shared service other departments can call.",
+          "aiSolutionsPersonal": 4
         },
         {
-          "name": "Marketing & Communications",
+          "name": "Digital Transformation",
+          "function": "Technology",
+          "staff": 11,
+          "mix": {
+            "leadership": 1,
+            "manager": 3,
+            "specialist": 6,
+            "support": 1
+          },
+          "metrics": {
+            "users": 90,
+            "freq": 87,
+            "train": 98,
+            "flow": 86,
+            "tasks": 84,
+            "cover": 80,
+            "prof": 88,
+            "comp": 100,
+            "agent": 31,
+            "automate": 38
+          },
+          "sessions": 9.0,
+          "cases": 18,
+          "aiSolutions": 4,
+          "tools": [
+            [
+              "Claude (Enterprise)",
+              90
+            ],
+            [
+              "Microsoft 365 Copilot",
+              68
+            ],
+            [
+              "Power Automate AI Builder",
+              44
+            ]
+          ],
+          "processes": [
+            "Automation opportunity mapping",
+            "Internal AI tool evaluation",
+            "Change management communications",
+            "Rollout playbook drafting"
+          ],
+          "gap": "Small team driving change across the business, but adoption in other departments still lags behind their own.",
+          "opportunity": "Formalise the team as the internal AI centre of excellence, with a repeatable onboarding kit per department.",
+          "aiSolutionsPersonal": 1
+        },
+        {
+          "name": "Marketing",
           "function": "Commercial",
           "staff": 18,
           "mix": {
@@ -87,16 +142,19 @@ export const SAMPLE_PAYLOAD: WirePayload = {
           },
           "metrics": {
             "users": 83,
-            "freq": 88,
-            "train": 90,
-            "flow": 84,
-            "tasks": 86,
-            "cover": 74,
-            "prof": 80,
-            "comp": 72
+            "freq": 80,
+            "train": 91,
+            "flow": 79,
+            "tasks": 77,
+            "cover": 73,
+            "prof": 81,
+            "comp": 95,
+            "agent": 29,
+            "automate": 35
           },
-          "sessions": 7.4,
-          "cases": 16,
+          "sessions": 8.3,
+          "cases": 17,
+          "aiSolutions": 6,
           "tools": [
             [
               "Claude (Enterprise)",
@@ -118,52 +176,8 @@ export const SAMPLE_PAYLOAD: WirePayload = {
             "Press release first drafts"
           ],
           "gap": "Compliance is the weak point. Some image generation still happens in personal accounts.",
-          "opportunity": "Move all creative work into approved tools and reuse the brand-voice prompt library."
-        },
-        {
-          "name": "Learning & Development",
-          "function": "Corporate Services",
-          "staff": 9,
-          "mix": {
-            "leadership": 1,
-            "manager": 2,
-            "specialist": 5,
-            "support": 1
-          },
-          "metrics": {
-            "users": 89,
-            "freq": 76,
-            "train": 100,
-            "flow": 78,
-            "tasks": 70,
-            "cover": 68,
-            "prof": 74,
-            "comp": 88
-          },
-          "sessions": 6.1,
-          "cases": 12,
-          "tools": [
-            [
-              "Claude (Enterprise)",
-              92
-            ],
-            [
-              "Microsoft 365 Copilot",
-              44
-            ],
-            [
-              "Otter / Teams AI notes",
-              38
-            ]
-          ],
-          "processes": [
-            "Course outline and assessment drafting",
-            "Training needs analysis",
-            "Session summaries and follow-ups",
-            "Nomination and attendance reporting"
-          ],
-          "gap": "High skill, small team, so capacity limits how much they can support other departments.",
-          "opportunity": "Turn the internal Claude programme into a repeatable cycle run by departmental champions."
+          "opportunity": "Move all creative work into approved tools and reuse the brand-voice prompt library.",
+          "aiSolutionsPersonal": 2
         },
         {
           "name": "Sales",
@@ -177,16 +191,19 @@ export const SAMPLE_PAYLOAD: WirePayload = {
           },
           "metrics": {
             "users": 71,
-            "freq": 74,
-            "train": 68,
-            "flow": 72,
-            "tasks": 78,
-            "cover": 64,
-            "prof": 66,
-            "comp": 58
+            "freq": 68,
+            "train": 79,
+            "flow": 67,
+            "tasks": 65,
+            "cover": 61,
+            "prof": 69,
+            "comp": 83,
+            "agent": 25,
+            "automate": 30
           },
-          "sessions": 5.2,
+          "sessions": 7.1,
           "cases": 14,
+          "aiSolutions": 9,
           "tools": [
             [
               "Claude (Enterprise)",
@@ -208,10 +225,11 @@ export const SAMPLE_PAYLOAD: WirePayload = {
             "CRM note clean-up"
           ],
           "gap": "Agents in the field use AI on personal phones, outside any company account.",
-          "opportunity": "A mobile-approved assistant converts unmanaged use into measured, compliant use."
+          "opportunity": "A mobile-approved assistant converts unmanaged use into measured, compliant use.",
+          "aiSolutionsPersonal": 2
         },
         {
-          "name": "Customer Service",
+          "name": "Customer Relations",
           "function": "Commercial",
           "staff": 22,
           "mix": {
@@ -222,16 +240,19 @@ export const SAMPLE_PAYLOAD: WirePayload = {
           },
           "metrics": {
             "users": 68,
-            "freq": 70,
-            "train": 72,
-            "flow": 66,
-            "tasks": 74,
-            "cover": 60,
-            "prof": 62,
-            "comp": 64
+            "freq": 65,
+            "train": 76,
+            "flow": 64,
+            "tasks": 62,
+            "cover": 58,
+            "prof": 66,
+            "comp": 80,
+            "agent": 24,
+            "automate": 29
           },
-          "sessions": 5.0,
-          "cases": 11,
+          "sessions": 6.8,
+          "cases": 14,
+          "aiSolutions": 6,
           "tools": [
             [
               "Claude (Enterprise)",
@@ -253,7 +274,57 @@ export const SAMPLE_PAYLOAD: WirePayload = {
             "Knowledge base updates"
           ],
           "gap": "Evening and weekend shifts use AI far less than weekday teams.",
-          "opportunity": "Response templates generated once and reused would lift the whole shift pattern."
+          "opportunity": "Response templates generated once and reused would lift the whole shift pattern.",
+          "aiSolutionsPersonal": 3
+        },
+        {
+          "name": "Hospitality",
+          "function": "Commercial",
+          "staff": 19,
+          "mix": {
+            "leadership": 1,
+            "manager": 3,
+            "specialist": 9,
+            "support": 6
+          },
+          "metrics": {
+            "users": 62,
+            "freq": 59,
+            "train": 70,
+            "flow": 58,
+            "tasks": 56,
+            "cover": 52,
+            "prof": 60,
+            "comp": 74,
+            "agent": 22,
+            "automate": 26
+          },
+          "sessions": 6.2,
+          "cases": 12,
+          "aiSolutions": 4,
+          "tools": [
+            [
+              "Claude (Enterprise)",
+              55
+            ],
+            [
+              "Microsoft 365 Copilot",
+              42
+            ],
+            [
+              "Canva Magic Studio",
+              26
+            ]
+          ],
+          "processes": [
+            "Guest communication drafting",
+            "Event proposal writing",
+            "Feedback summarising",
+            "Menu and signage copy"
+          ],
+          "gap": "Front-of-house staff have little desk time, so AI use is mostly back-office.",
+          "opportunity": "A guest-messaging assistant on shared tablets would bring AI to the floor, not just the office.",
+          "aiSolutionsPersonal": 2
         },
         {
           "name": "Human Resources",
@@ -267,16 +338,19 @@ export const SAMPLE_PAYLOAD: WirePayload = {
           },
           "metrics": {
             "users": 64,
-            "freq": 58,
-            "train": 80,
+            "freq": 61,
+            "train": 72,
             "flow": 60,
-            "tasks": 52,
+            "tasks": 58,
             "cover": 54,
-            "prof": 58,
-            "comp": 76
+            "prof": 62,
+            "comp": 76,
+            "agent": 22,
+            "automate": 27
           },
-          "sessions": 4.1,
-          "cases": 9,
+          "sessions": 6.4,
+          "cases": 13,
+          "aiSolutions": 4,
           "tools": [
             [
               "Claude (Enterprise)",
@@ -298,7 +372,8 @@ export const SAMPLE_PAYLOAD: WirePayload = {
             "Interview note summarising"
           ],
           "gap": "Strong training numbers, weak daily use. People trained, then returned to old habits.",
-          "opportunity": "Tie AI use to the recruitment cycle so it becomes part of the process, not an extra step."
+          "opportunity": "Tie AI use to the recruitment cycle so it becomes part of the process, not an extra step.",
+          "aiSolutionsPersonal": 2
         },
         {
           "name": "Finance",
@@ -312,16 +387,19 @@ export const SAMPLE_PAYLOAD: WirePayload = {
           },
           "metrics": {
             "users": 58,
-            "freq": 54,
+            "freq": 55,
             "train": 66,
-            "flow": 52,
-            "tasks": 48,
-            "cover": 46,
-            "prof": 54,
-            "comp": 82
+            "flow": 54,
+            "tasks": 52,
+            "cover": 48,
+            "prof": 56,
+            "comp": 70,
+            "agent": 20,
+            "automate": 24
           },
-          "sessions": 3.6,
-          "cases": 8,
+          "sessions": 5.8,
+          "cases": 12,
+          "aiSolutions": 6,
           "tools": [
             [
               "Microsoft 365 Copilot",
@@ -343,10 +421,104 @@ export const SAMPLE_PAYLOAD: WirePayload = {
             "Contract payment term checks"
           ],
           "gap": "Data sensitivity makes the team cautious; most work stays in spreadsheets.",
-          "opportunity": "An approved closed environment for financial data removes the main blocker."
+          "opportunity": "An approved closed environment for financial data removes the main blocker.",
+          "aiSolutionsPersonal": 1
         },
         {
-          "name": "Project Development",
+          "name": "Risk Management & Control",
+          "function": "Corporate Services",
+          "staff": 10,
+          "mix": {
+            "leadership": 1,
+            "manager": 2,
+            "specialist": 6,
+            "support": 1
+          },
+          "metrics": {
+            "users": 53,
+            "freq": 50,
+            "train": 61,
+            "flow": 49,
+            "tasks": 47,
+            "cover": 43,
+            "prof": 51,
+            "comp": 65,
+            "agent": 19,
+            "automate": 22
+          },
+          "sessions": 5.3,
+          "cases": 11,
+          "aiSolutions": 2,
+          "tools": [
+            [
+              "Microsoft 365 Copilot",
+              50
+            ],
+            [
+              "Claude (Enterprise)",
+              38
+            ],
+            [
+              "Power Automate AI Builder",
+              19
+            ]
+          ],
+          "processes": [
+            "Risk register summarising",
+            "Control testing documentation",
+            "Incident report drafting",
+            "Policy gap analysis"
+          ],
+          "gap": "Work is judgement-heavy and sensitive, so the team is deliberately cautious about what goes into any AI tool.",
+          "opportunity": "A closed-environment control-testing assistant would save the most repetitive part of the job first.",
+          "aiSolutionsPersonal": 1
+        },
+        {
+          "name": "Internal Audit",
+          "function": "Corporate Services",
+          "staff": 8,
+          "mix": {
+            "leadership": 1,
+            "manager": 2,
+            "specialist": 4,
+            "support": 1
+          },
+          "metrics": {
+            "users": 49,
+            "freq": 46,
+            "train": 57,
+            "flow": 45,
+            "tasks": 43,
+            "cover": 39,
+            "prof": 47,
+            "comp": 61,
+            "agent": 17,
+            "automate": 21
+          },
+          "sessions": 4.9,
+          "cases": 10,
+          "aiSolutions": 2,
+          "tools": [
+            [
+              "Microsoft 365 Copilot",
+              47
+            ],
+            [
+              "Claude (Enterprise)",
+              35
+            ]
+          ],
+          "processes": [
+            "Audit finding write-ups",
+            "Working paper summarising",
+            "Sample testing checklists"
+          ],
+          "gap": "Independence concerns mean the team hasn't yet agreed what AI use is appropriate for audit evidence.",
+          "opportunity": "A written AI-use protocol for audit work would unlock this small but influential team.",
+          "aiSolutionsPersonal": 0
+        },
+        {
+          "name": "Development",
           "function": "Technical",
           "staff": 31,
           "mix": {
@@ -357,16 +529,19 @@ export const SAMPLE_PAYLOAD: WirePayload = {
           },
           "metrics": {
             "users": 45,
-            "freq": 48,
-            "train": 56,
-            "flow": 44,
-            "tasks": 50,
-            "cover": 40,
-            "prof": 46,
-            "comp": 60
+            "freq": 42,
+            "train": 53,
+            "flow": 41,
+            "tasks": 39,
+            "cover": 35,
+            "prof": 43,
+            "comp": 57,
+            "agent": 16,
+            "automate": 19
           },
-          "sessions": 3.1,
-          "cases": 7,
+          "sessions": 4.5,
+          "cases": 9,
+          "aiSolutions": 5,
           "tools": [
             [
               "Microsoft 365 Copilot",
@@ -388,10 +563,11 @@ export const SAMPLE_PAYLOAD: WirePayload = {
             "Progress report writing"
           ],
           "gap": "Site-based staff have limited desk time and patchy device access.",
-          "opportunity": "Mobile summarising of site reports is the highest-value quick win."
+          "opportunity": "Mobile summarising of site reports is the highest-value quick win.",
+          "aiSolutionsPersonal": 1
         },
         {
-          "name": "Property Management",
+          "name": "Facilities & Community Management",
           "function": "Technical",
           "staff": 28,
           "mix": {
@@ -402,16 +578,19 @@ export const SAMPLE_PAYLOAD: WirePayload = {
           },
           "metrics": {
             "users": 43,
-            "freq": 44,
-            "train": 52,
-            "flow": 40,
-            "tasks": 46,
-            "cover": 38,
-            "prof": 42,
-            "comp": 58
+            "freq": 40,
+            "train": 51,
+            "flow": 39,
+            "tasks": 37,
+            "cover": 33,
+            "prof": 41,
+            "comp": 55,
+            "agent": 15,
+            "automate": 18
           },
-          "sessions": 2.9,
-          "cases": 6,
+          "sessions": 4.3,
+          "cases": 9,
+          "aiSolutions": 5,
           "tools": [
             [
               "Microsoft 365 Copilot",
@@ -433,7 +612,8 @@ export const SAMPLE_PAYLOAD: WirePayload = {
             "Owner association correspondence"
           ],
           "gap": "Technicians and support staff are a third of the team and barely use AI.",
-          "opportunity": "Short task-based training on one repeated job beats broad general training here."
+          "opportunity": "Short task-based training on one repeated job beats broad general training here.",
+          "aiSolutionsPersonal": 2
         },
         {
           "name": "Administration",
@@ -447,16 +627,19 @@ export const SAMPLE_PAYLOAD: WirePayload = {
           },
           "metrics": {
             "users": 38,
-            "freq": 42,
-            "train": 50,
-            "flow": 36,
-            "tasks": 40,
-            "cover": 34,
-            "prof": 38,
-            "comp": 62
+            "freq": 35,
+            "train": 46,
+            "flow": 34,
+            "tasks": 32,
+            "cover": 28,
+            "prof": 36,
+            "comp": 50,
+            "agent": 13,
+            "automate": 16
           },
-          "sessions": 2.7,
-          "cases": 5,
+          "sessions": 3.8,
+          "cases": 8,
+          "aiSolutions": 2,
           "tools": [
             [
               "Microsoft 365 Copilot",
@@ -478,10 +661,11 @@ export const SAMPLE_PAYLOAD: WirePayload = {
             "Meeting scheduling summaries"
           ],
           "gap": "The work is routine and repetitive, ideal for AI, but nobody has mapped it.",
-          "opportunity": "A one-day workflow mapping session would likely double this department's score."
+          "opportunity": "A one-day workflow mapping session would likely double this department's score.",
+          "aiSolutionsPersonal": 0
         },
         {
-          "name": "Operations",
+          "name": "Construction",
           "function": "Technical",
           "staff": 41,
           "mix": {
@@ -492,16 +676,19 @@ export const SAMPLE_PAYLOAD: WirePayload = {
           },
           "metrics": {
             "users": 34,
-            "freq": 36,
-            "train": 44,
-            "flow": 32,
-            "tasks": 38,
-            "cover": 30,
-            "prof": 34,
-            "comp": 54
+            "freq": 31,
+            "train": 42,
+            "flow": 30,
+            "tasks": 28,
+            "cover": 24,
+            "prof": 32,
+            "comp": 46,
+            "agent": 12,
+            "automate": 14
           },
-          "sessions": 2.4,
-          "cases": 5,
+          "sessions": 3.4,
+          "cases": 7,
+          "aiSolutions": 5,
           "tools": [
             [
               "Microsoft 365 Copilot",
@@ -523,10 +710,11 @@ export const SAMPLE_PAYLOAD: WirePayload = {
             "Checklist generation"
           ],
           "gap": "Largest headcount, lowest coverage. The biggest single drag on the org-wide rate.",
-          "opportunity": "Every point gained here moves the organisation number more than anywhere else."
+          "opportunity": "Every point gained here moves the organisation number more than anywhere else.",
+          "aiSolutionsPersonal": 1
         },
         {
-          "name": "Procurement",
+          "name": "Procurement & Tendering",
           "function": "Corporate Services",
           "staff": 12,
           "mix": {
@@ -538,15 +726,18 @@ export const SAMPLE_PAYLOAD: WirePayload = {
           "metrics": {
             "users": 33,
             "freq": 30,
-            "train": 38,
-            "flow": 28,
-            "tasks": 26,
-            "cover": 24,
-            "prof": 30,
-            "comp": 58
+            "train": 41,
+            "flow": 29,
+            "tasks": 27,
+            "cover": 23,
+            "prof": 31,
+            "comp": 45,
+            "agent": 12,
+            "automate": 14
           },
-          "sessions": 2.1,
-          "cases": 4,
+          "sessions": 3.3,
+          "cases": 7,
+          "aiSolutions": 2,
           "tools": [
             [
               "Microsoft 365 Copilot",
@@ -567,7 +758,52 @@ export const SAMPLE_PAYLOAD: WirePayload = {
             "Purchase order checks"
           ],
           "gap": "Only one or two people trained; the rest have never opened an approved tool.",
-          "opportunity": "Bid comparison is slow and rule-based, the natural place to start."
+          "opportunity": "Bid comparison is slow and rule-based, the natural place to start.",
+          "aiSolutionsPersonal": 1
+        },
+        {
+          "name": "Management",
+          "function": "Leadership",
+          "staff": 9,
+          "mix": {
+            "leadership": 6,
+            "manager": 3,
+            "specialist": 0,
+            "support": 0
+          },
+          "metrics": {
+            "users": 47,
+            "freq": 44,
+            "train": 55,
+            "flow": 43,
+            "tasks": 41,
+            "cover": 37,
+            "prof": 45,
+            "comp": 59,
+            "agent": 16,
+            "automate": 20
+          },
+          "sessions": 4.7,
+          "cases": 9,
+          "aiSolutions": 2,
+          "tools": [
+            [
+              "Claude (Enterprise)",
+              42
+            ],
+            [
+              "Microsoft 365 Copilot",
+              30
+            ]
+          ],
+          "processes": [
+            "Board pack review notes",
+            "Strategic memo drafting",
+            "Meeting preparation summaries"
+          ],
+          "gap": "Leadership uses AI personally more than they've asked their teams to, so adoption below them lags what they'd expect.",
+          "opportunity": "Leadership visibly using and endorsing specific tools is often the fastest way to move the rest of the org.",
+          "aiSolutionsPersonal": 1
         },
         {
           "name": "Legal",
@@ -581,16 +817,19 @@ export const SAMPLE_PAYLOAD: WirePayload = {
           },
           "metrics": {
             "users": 24,
-            "freq": 20,
-            "train": 28,
-            "flow": 18,
-            "tasks": 16,
+            "freq": 21,
+            "train": 32,
+            "flow": 20,
+            "tasks": 18,
             "cover": 14,
             "prof": 22,
-            "comp": 40
+            "comp": 36,
+            "agent": 8,
+            "automate": 10
           },
-          "sessions": 1.5,
-          "cases": 3,
+          "sessions": 2.4,
+          "cases": 5,
+          "aiSolutions": 0,
           "tools": [
             [
               "Microsoft 365 Copilot",
@@ -606,7 +845,8 @@ export const SAMPLE_PAYLOAD: WirePayload = {
             "Contract summarising"
           ],
           "gap": "Confidentiality concerns and no approved workflow for legal documents.",
-          "opportunity": "A closed no-training-on-data environment plus a written legal AI protocol unlocks this team."
+          "opportunity": "A closed no-training-on-data environment plus a written legal AI protocol unlocks this team.",
+          "aiSolutionsPersonal": 0
         }
       ]
     }

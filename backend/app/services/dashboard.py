@@ -112,6 +112,8 @@ def build_dashboard(
                     "metrics": {key: getattr(score, key) for key in INDICATOR_KEYS},
                     "sessions": score.sessions_per_week,
                     "cases": score.use_cases,
+                    "aiSolutions": score.ai_solutions,
+                    "aiSolutionsPersonal": score.ai_solutions_personal,
                     "tools": score.top_tools or [],
                     "processes": score.processes or [],
                     "gap": score.gap or "Not recorded",

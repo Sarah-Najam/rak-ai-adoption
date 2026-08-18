@@ -28,6 +28,8 @@ export const INDICATORS = [
   "cover",
   "prof",
   "comp",
+  "agent",
+  "automate",
 ] as const;
 
 export type IndicatorKey = (typeof INDICATORS)[number];
@@ -42,7 +44,7 @@ export interface IndicatorMeta {
 }
 
 export const INDICATOR_META: IndicatorMeta[] = [
-  { key: "users", label: "Active AI users", defaultWeight: 20,
+  { key: "users", label: "Active AI users", defaultWeight: 16,
     note: "% of staff who used an AI tool in the last 30 days" },
   { key: "freq", label: "Usage frequency", defaultWeight: 15,
     note: "AI sessions per user per week, scored against a target of 5" },
@@ -50,7 +52,7 @@ export const INDICATOR_META: IndicatorMeta[] = [
     note: "% of staff who completed the assigned AI training" },
   { key: "flow", label: "AI in weekly workflow", defaultWeight: 15,
     note: "% using AI in real weekly work, not one-off trials" },
-  { key: "tasks", label: "AI-assisted task volume", defaultWeight: 10,
+  { key: "tasks", label: "AI-assisted task volume", defaultWeight: 8,
     note: "AI-assisted tasks per user per month, against a target" },
   { key: "cover", label: "Eligible workflows covered", defaultWeight: 10,
     note: "% of AI-suitable workflows that actually use AI" },
@@ -58,6 +60,10 @@ export const INDICATOR_META: IndicatorMeta[] = [
     note: "Average score from the AI knowledge check" },
   { key: "comp", label: "Safe use of AI", defaultWeight: 5,
     note: "Company accounts used, no sensitive data in personal ones" },
+  { key: "agent", label: "AI agents built", defaultWeight: 3,
+    note: "% who built an AI agent, for work or personal use" },
+  { key: "automate", label: "Processes automated", defaultWeight: 3,
+    note: "% who automated a process, for work or personal use" },
 ];
 
 export const DEFAULT_WEIGHTS: Weights = INDICATOR_META.reduce(
@@ -125,6 +131,8 @@ export interface DepartmentWave {
   metrics: Record<IndicatorKey, number>;
   sessions: number;
   cases: number;
+  aiSolutions: number;
+  aiSolutionsPersonal: number;
   tools: [string, number][];
   processes: string[];
   gap: string;

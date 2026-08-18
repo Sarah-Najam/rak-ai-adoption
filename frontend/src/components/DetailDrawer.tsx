@@ -73,6 +73,10 @@ export const DetailDrawer = ({ dash }: { dash: Dashboard }) => {
                   <div className="v">{snapshot.sessions.toFixed(1)} <small>sessions / user / week</small></div></div>
                 <div><div className="k">AI use cases</div>
                   <div className="v">{snapshot.cases} <small>documented</small></div></div>
+                <div><div className="k">AI-enabled solutions</div>
+                  <div className="v">{snapshot.aiSolutions} <small>agents + automations</small></div></div>
+                <div><div className="k">Personal use</div>
+                  <div className="v">{snapshot.aiSolutionsPersonal} <small>not scored</small></div></div>
               </div>
 
               <div className="blk">

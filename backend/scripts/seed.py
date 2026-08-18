@@ -20,18 +20,22 @@ from app.models.models import Department, Role, Target, User, WeightSet
 from app.services.scoring import DEFAULT_WEIGHTS
 
 DEPARTMENTS = [
-    ("Human Resources", "Corporate Services"),
+    ("Digital Transformation", "Technology"),
     ("Finance", "Corporate Services"),
-    ("Information Technology", "Technology"),
-    ("Marketing & Communications", "Commercial"),
+    ("Marketing", "Commercial"),
+    ("Customer Relations", "Commercial"),
     ("Sales", "Commercial"),
+    ("Construction", "Technical"),
+    ("Development", "Technical"),
+    ("Procurement & Tendering", "Corporate Services"),
+    ("Facilities & Community Management", "Technical"),
+    ("Risk Management & Control", "Corporate Services"),
     ("Legal", "Corporate Services"),
-    ("Procurement", "Corporate Services"),
-    ("Operations", "Technical"),
-    ("Learning & Development", "Corporate Services"),
-    ("Property Management", "Technical"),
-    ("Customer Service", "Commercial"),
-    ("Project Development", "Technical"),
+    ("Human Resources", "Corporate Services"),
+    ("Hospitality", "Commercial"),
+    ("Internal Audit", "Corporate Services"),
+    ("Management", "Leadership"),
+    ("IT", "Technology"),
     ("Administration", "Corporate Services"),
 ]
 

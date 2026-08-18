@@ -59,6 +59,9 @@ COLUMN_HINTS: Dict[str, Sequence[str]] = {
     "pasted": ("have you put any of these into a personal ai account",),
     "training": ("have you completed any ai training",),
     "linking_code": ("personal code", "create your code"),
+    "built_agent": ("have you built an ai agent",),
+    "automated_process": ("have you automated a process using ai",),
+    "work_relevant": ("was what you built related to the work you",),
 }
 
 # Free-text idea boxes at E2. Any column matching these contributes.
@@ -234,10 +237,12 @@ class DepartmentEvidence:
 
 def score_department(
     rows: Sequence[Dict[str, Any]], mapping: ColumnMap
-) -> Tuple[IndicatorScores, DepartmentEvidence, int]:
+) -> Tuple[IndicatorScores, DepartmentEvidence, int, int, int]:
     """
-    Returns the eight indicator scores, the supporting evidence, and the number
-    of people who reported using AI.
+    Returns the ten indicator scores, the supporting evidence, the number
+    of people who reported using AI, the count of work-relevant AI
+    solutions, and the count of personal-use (not work-relevant) AI
+    solutions in this department.
 
     Non-users stay in the denominator throughout. A department where three
     enthusiasts answered and thirty non-users also answered is not a well
@@ -245,7 +250,7 @@ def score_department(
     """
     total = len(rows)
     if total == 0:
-        return IndicatorScores(), DepartmentEvidence(), 0
+        return IndicatorScores(), DepartmentEvidence(), 0, 0, 0
 
     users = [r for r in rows if is_yes(mapping.get("used_30d", r))]
     user_ids = {id(r) for r in users}
@@ -319,6 +324,38 @@ def score_department(
         safe_scores.append(max(0.0, score))
     safe_use = mean(safe_scores)
 
+    # 9 & 10. Agent creation and process automation, both gated by the same
+    # relevance question. Someone only counts here if what they built was
+    # actually related to the work they do, not a personal side project.
+    relevant = [is_yes(mapping.get("work_relevant", r)) for r in rows]
+
+    # Scored regardless of relevance: anyone who built an agent or
+    # automated a process counts here, work-related or personal.
+    agent_flags = [is_yes(mapping.get("built_agent", r)) for r in rows]
+    automate_flags = [is_yes(mapping.get("automated_process", r)) for r in rows]
+    agent_creation = mean([100.0 if f else 0.0 for f in agent_flags])
+    process_automation = mean([100.0 if f else 0.0 for f in automate_flags])
+
+    # "AI-enabled solutions" stays work-relevant-only, for the drill-down
+    # count — a narrower, more meaningful number than the raw score above.
+    ai_solutions_count = sum(
+        1 for i, r in enumerate(rows)
+        if (is_yes(mapping.get("built_agent", r)) or is_yes(mapping.get("automated_process", r))) and relevant[i]
+    )
+
+    # Personal-use agents/automations: built, but not related to their job.
+    # Tracked for visibility only, never scored, so a busy hobbyist cannot
+    # inflate a department's real work-relevant adoption number.
+    personal_agent_flags = [
+        is_yes(mapping.get("built_agent", r)) and not relevant[i]
+        for i, r in enumerate(rows)
+    ]
+    personal_automate_flags = [
+        is_yes(mapping.get("automated_process", r)) and not relevant[i]
+        for i, r in enumerate(rows)
+    ]
+    ai_solutions_personal_count = sum(personal_agent_flags) + sum(personal_automate_flags)
+
     scores = IndicatorScores(
         users=round(active_users, 1),
         freq=round(frequency, 1),
@@ -328,10 +365,11 @@ def score_department(
         cover=round(coverage, 1),
         prof=round(proficiency, 1),
         comp=round(safe_use, 1),
+        agent=round(agent_creation, 1),
+        automate=round(process_automation, 1),
     )
 
-    return scores, _evidence(rows, users, mapping, avg_sessions), len(users)
-
+    return scores, _evidence(rows, users, mapping, avg_sessions), len(users), ai_solutions_count, ai_solutions_personal_count
 
 def _evidence(
     rows: Sequence[Dict[str, Any]],
@@ -447,8 +485,7 @@ def ingest_wave(
 
     results: List[DepartmentResult] = []
     for key, rows in sorted(grouped.items()):
-        scores, evidence, user_count = score_department(rows, mapping)
-
+        scores, evidence, user_count, ai_solutions_count, ai_solutions_personal_count = score_department(rows, mapping)
         hr = headcounts.get(key)
         if hr is None:
             report.unmatched_departments.append(str(mapping.get("department", rows[0])).strip())
@@ -469,6 +506,8 @@ def ingest_wave(
             processes=evidence.processes,
             gap=evidence.gap,
             opportunity=evidence.opportunity,
+            ai_solutions=ai_solutions_count,
+            ai_solutions_personal=ai_solutions_personal_count,
         )
 
         if result.reliability() == "insufficient":
