@@ -63,8 +63,7 @@ const Tooltip = ({ state, wave }: { state: TooltipState | null; wave: string }) 
       </div>
       <div className="tr"><span>Active users</span><b>{view.active} of {view.staff}</b></div>
       <div className="tr"><span>AI-enabled solutions</span><b>{snapshot?.aiSolutions ?? 0}</b></div>
-      <div className="tr"><span>Personal use (not counted)</span><b>{snapshot?.aiSolutionsPersonal ?? 0}</b></div>
-      {snapshot && (
+      <div className="tr"><span>Of which, personal use</span><b>{snapshot?.aiSolutionsPersonal ?? 0}</b></div>      {snapshot && (
         <div className="tr">
           <span>Sessions / user / week</span>
           <b>{snapshot.sessions.toFixed(1)}</b>

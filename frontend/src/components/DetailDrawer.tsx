@@ -76,7 +76,7 @@ export const DetailDrawer = ({ dash }: { dash: Dashboard }) => {
                 <div><div className="k">AI-enabled solutions</div>
                   <div className="v">{snapshot.aiSolutions} <small>agents + automations</small></div></div>
                 <div><div className="k">Personal use</div>
-                  <div className="v">{snapshot.aiSolutionsPersonal} <small>not scored</small></div></div>
+                  <div className="v">{snapshot.aiSolutionsPersonal} <small>included in score</small></div></div>
               </div>
 
               <div className="blk">
